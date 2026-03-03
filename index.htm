@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Pribadi | Nama Anda</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome (untuk ikon) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Link ke file CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- 🌌 FIXED BACKGROUND ANIMATION -->
+    <div class="fixed-bg">
+        <div class="bg-grid"></div>
+        <div class="bg-glow"></div>
+        <div class="bg-particles">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- 🌊 SPLASH SCREEN -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <h1 class="splash-welcome"><span id="typing-text"></span><span class="cursor"></span></h1>
+            <p class="splash-subtitle">Di Portfolio Pribadiku</p>
+            <button id="enter-btn">Enter Portofolio</button>
+        </div>
+    </div>
+
+    <!-- 🏠 HALAMAN UTAMA -->
+    <div id="main-content">
+        <!-- Navbar -->
+        <header>
+            <nav>
+                <a href="#hero" class="nav-logo">Web.Port</a>
+                <ul>
+                    <li><a href="#biodata">Biodata</a></li>
+                    <li><a href="#latar-belakang">Latar Belakang</a></li>
+                    <li><a href="#minat">Minat</a></li>
+                    <li><a href="#tujuan">Tujuan</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#karya">Karya</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Section 1: Hero -->
+            <section id="hero" class="section-full page-section">
+                <!-- Elemen Dekorasi Background Hero -->
+                <div class="hero-bg-elements">
+                    <div class="code-particle" style="top: 20%; left: 10%; animation-delay: 0s;">&lt;/&gt;</div>
+                    <div class="code-particle" style="top: 70%; right: 15%; animation-delay: 2s;">{ }</div>
+                    <div class="code-particle" style="top: 30%; right: 20%; animation-delay: 4s;">#</div>
+                    <div class="code-particle" style="top: 80%; left: 20%; animation-delay: 1s;">;</div>
+                </div>
+                <div class="hero-content">
+                    <div class="profile-container">
+                        <img src="Foto-Profile.jpg" alt="Foto Profil" class="profile-pic">
+                    </div>
+                    <h1>Dza-Fa</h1>
+                    <p>Seseorang yang ingin menjadi Game Developer</p>
+                    <!-- Kepedeean -->
+                </div>
+                <a href="#biodata" class="scroll-down-btn">
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+            </section>
+
+            <!-- Section 2: Biodata -->
+            <section id="biodata" class="section-container reveal-on-scroll page-section">
+                <h2 class="section-title">Biodata</h2>
+                <div class="card glassmorphism">
+                    <div class="biodata-grid">
+                        <div class="biodata-item">
+                            <div class="biodata-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="biodata-info">
+                                <span class="biodata-label">Nama Lengkap</span>
+                                <span class="biodata-value">Muhammad Dzakiir Faisal Hasan</span>
+                            </div>
+                        </div>
+                        <div class="biodata-item">
+                            <div class="biodata-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="biodata-info">
+                                <span class="biodata-label">Tanggal Lahir</span>
+                                <span class="biodata-value">12 Juli 2010</span>
+                            </div>
+                        </div>
+                        <div class="biodata-item">
+                            <div class="biodata-icon">
+                                <i class="fas fa-school"></i>
+                            </div>
+                            <div class="biodata-info">
+                                <span class="biodata-label">Sekolah</span>
+                                <span class="biodata-value">SMK Negeri 1 Garut</span>
+                            </div>
+                        </div>
+                        <div class="biodata-item">
+                            <div class="biodata-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="biodata-info">
+                                <span class="biodata-label">Kelas</span>
+                                <span class="biodata-value">X - PPLG 2</span>
+                            </div>
+                        </div>
+                        <div class="biodata-item full-width">
+                            <div class="biodata-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="biodata-info">
+                                <span class="biodata-label">Alamat</span>
+                                <span class="biodata-value">Jl. Perum Oma Indah, Desa Godog, Kec. Karangpawitan, Kab. Garut, Prov. Jawa Barat</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Latar Belakang -->
+            <section id="latar-belakang" class="section-container reveal-on-scroll page-section">
+                <h2 class="section-title">Latar Belakang</h2>
+                <div class="decorative-line"></div>
+                <p>Sejak kecil saya menyukai cerita, baik dalam bentuk buku maupun game. Ketertarikan saya pada dunia teknologi dimulai ketika ayah memperkenalkan saya pada pemrograman saat SMP. Dari situ saya mulai memahami bahwa dunia cerita dan logika pemrograman bisa digabungkan. Karena itu, saya tertarik untuk menjadi seorang game developer.</p>
+            </section>
+
+            <!-- Section 4: Minat & Fokus -->
+            <section id="minat" class="section-container reveal-on-scroll page-section">
+                <h2 class="section-title">Minat & Fokus</h2>
+                <div class="grid-2x2">
+                    <div class="card-interactive">
+                        <i class="fas fa-gamepad"></i>
+                        <h4>Game Development</h4>
+                        <p>Menciptakan game yang memikat. Baik dari segi gameplay, visual, maupun audio.</p>
+                    </div>
+                    <div class="card-interactive">
+                        <i class="fas fa-server"></i>
+                        <h4>Backend Logic</h4>
+                        <p>Membangun sistem yang andal dan efisien.</p>
+                    </div>
+                    <div class="card-interactive">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Mobile Apps</h4>
+                        <p>Menjelajahi pengembangan aplikasi cross-platform.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Tujuan Masuk IT Club -->
+            <section id="tujuan" class="section-container reveal-on-scroll page-section">
+                <h2 class="section-title">Tujuan Masuk IT Club</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Kolaborasi & Jaringan</h3>
+                            <p>Bertemu dengan rekan-rekan yang memiliki minat sama, berkolaborasi dalam proyek, dan membangun jaringan profesional.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Pembelajaran Terstruktur</h3>
+                            <p>Mendapatkan bimbingan dari senior dan mengikuti program pembelajaran yang terarah untuk mempercepat pengembangan skill.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Portofolio Nyata</h3>
+                            <p>Terlibat dalam proyek-proyek nyata yang dapat menjadi bagian penting dari portofolio saya untuk karir di masa depan.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Skills -->
+            <section id="skills" class="section-container reveal-on-scroll page-section">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-wrapper">
+                    <div class="skill">
+                        <p>HTML5 & CSS3</p>
+                        <div class="progress-bar">
+                            <div class="progress" data-percent="55"></div>
+                        </div>
+                        <span class="percent-text">0%</span>
+                    </div>
+                    <div class="skill">
+                        <p>JavaScript (ES6+)</p>
+                        <div class="progress-bar">
+                            <div class="progress" data-percent="60"></div>
+                        </div>
+                        <span class="percent-text">0%</span>
+                    </div>
+                    <div class="skill">
+                        <p>Game development</p>
+                        <div class="progress-bar">
+                            <div class="progress" data-percent="20"></div>
+                        </div>
+                        <span class="percent-text">0%</span>
+                    </div>
+                    <div class="skill">
+                        <p>Git & GitHub</p>
+                        <div class="progress-bar">
+                            <div class="progress" data-percent="80"></div>
+                        </div>
+                        <span class="percent-text">0%</span>
+                    </div>
+                    <div class="skill">
+                        <p>Prompt Writing</p>
+                        <div class="progress-bar">
+                            <div class="progress" data-percent="70"></div>
+                        </div>
+                        <span class="percent-text">0%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Karya -->
+            <section id="karya" class="section-container reveal-on-scroll page-section">
+                <h2 class="section-title">Karya Saya</h2>
+                <div class="karya-grid">
+                    <!-- Kartu Karya 1 -->
+                    <div class="karya-card">
+                        <div class="karya-img" style="height: 160px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; position: relative;">
+                            <div style="font-size: 4rem;">🍜</div>
+                        </div>
+                        <div class="karya-content">
+                            <h3 class="karya-title">D' WarungS</h3>
+                            <p class="karya-description">Deskripsi singkat tentang proyek ini, teknologi yang digunakan, dan apa tujuannya.</p>
+                            <div class="karya-links">
+                                <a href="https://github.com/Dza-Fa/D-WarungS.git" class="karya-link" target="_blank"><i class="fab fa-github"></i> Kode</a>
+                                <a href="#" class="karya-link outline" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Kontak -->
+            <footer id="kontak" class="section-container reveal-on-scroll page-section">
+                <h2 class="section-title">Hubungi Saya</h2>
+                <div class="contact-icons">
+                    <a href="mailto:dzafahasan@gmail.com" class="contact-icon" target="_blank" rel="noopener noreferrer" data-tooltip="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://www.instagram.com/dzafah4" class="contact-icon" target="_blank" rel="noopener noreferrer" data-tooltip="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/Dza-Fa" class="contact-icon" target="_blank" rel="noopener noreferrer" data-tooltip="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="http://wa.me/6283871170979" class="contact-icon" target="_blank" rel="noopener noreferrer" data-tooltip="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+                <p class="copyright">&copy; 2045 Indonesia Cemas. Lets go!</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Link ke file JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

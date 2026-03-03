@@ -1,0 +1,965 @@
+/* --- GLOBAL STYLES & VARIABLES --- */
+:root {
+    --bg-color: #0a0a1a;
+    --primary-color: #8e44ad;
+    --secondary-color: #3498db;
+    --glow-color-1: rgba(142, 68, 173, 0.8);
+    --glow-color-2: rgba(52, 152, 219, 0.8);
+    --text-color: #ecf0f1;
+    --card-bg: rgba(22, 22, 44, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --font-family: 'Poppins', sans-serif;
+    --header-height: 70px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- CUSTOM SCROLLBAR --- */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #050510;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: none; /* Sembunyikan cursor default */
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 4rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    width: 0; /* Mulai dari 0 untuk animasi */
+    transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.section-container {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Trigger animasi underline saat section terlihat */
+.section-container.visible .section-title::after {
+    width: 60px;
+}
+
+/* --- FOCUS MODE STYLES --- */
+.page-section {
+    transition: transform 0.5s ease-in-out, filter 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+main.focus-mode .page-section.is-blurred {
+    transform: scale(0.95);
+    filter: blur(5px);
+    opacity: 0.5;
+    pointer-events: none; /* Mencegah interaksi dengan elemen yang di-blur */
+}
+
+
+/* --- CUSTOM CURSOR --- */
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+}
+
+body:hover .custom-cursor {
+    opacity: 1;
+}
+
+.custom-cursor.expand {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(52, 152, 219, 0.3);
+}
+
+/* --- FIXED BACKGROUND --- */
+.fixed-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -10;
+    overflow: hidden;
+    background: #0a0a1a;
+}
+
+.bg-grid {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px); }
+    100% { transform: perspective(500px) rotateX(60deg) translateY(40px) translateZ(-200px); }
+}
+
+.bg-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(142, 68, 173, 0.15), transparent 60%);
+    animation: pulseGlow 10s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.2); opacity: 0.8; }
+}
+
+/* --- BACKGROUND PARTICLES --- */
+.bg-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.bg-particles span {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    animation: animateParticles 25s linear infinite;
+    bottom: -150px;
+}
+
+.bg-particles span:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+.bg-particles span:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+.bg-particles span:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+.bg-particles span:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+.bg-particles span:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+.bg-particles span:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+.bg-particles span:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+.bg-particles span:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+.bg-particles span:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+.bg-particles span:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+@keyframes animateParticles {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
+
+/* --- SPLASH SCREEN --- */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /* Hapus background solid, biarkan background global terlihat */
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.8s ease-in-out, filter 0.8s ease-in-out;
+    overflow: hidden;
+    position: relative; /* Untuk positioning vignette */
+}
+
+/* Vignette effect untuk fokus sinematik */
+#splash-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradasi dari transparan di tengah ke gelap di pinggir */
+    background: radial-gradient(circle at center, transparent 40%, rgba(10, 10, 26, 0.3) 80%, var(--bg-color) 100%);
+    z-index: 0;
+}
+
+/* --- SPLASH EXIT ANIMATION --- */
+#splash-screen.animate-exit .splash-content {
+    animation: contentZoomOut 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+
+#splash-screen.animate-exit {
+    animation: splashScreenExit 0.8s ease-out 0.2s forwards; /* Fade out container di akhir */
+    pointer-events: none;
+}
+
+@keyframes contentZoomOut {
+    0% { transform: scale(1); opacity: 1; filter: blur(0); }
+    100% { transform: scale(1.05); opacity: 0; filter: blur(4px); } /* Camera move forward subtle */
+}
+
+@keyframes splashScreenExit {
+    to { 
+        opacity: 0; 
+        visibility: hidden;
+    }
+}
+
+.splash-content {
+    text-align: center;
+    transition: transform 0.1s ease-out; /* Untuk parallax yang halus */
+    position: relative; /* Pastikan konten di atas vignette */
+    z-index: 1;
+}
+
+.splash-welcome {
+    font-size: 5rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+}
+
+/* Cursor Effect */
+.cursor {
+    display: inline-block;
+    width: 4px;
+    height: 1em;
+    background-color: var(--secondary-color);
+    margin-left: 10px;
+    vertical-align: middle;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.splash-subtitle {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    color: #aaa;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.splash-subtitle.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#enter-btn {
+    margin-top: 3rem;
+    padding: 0.8rem 2.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#enter-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* --- MAIN CONTENT --- */
+#main-content {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.1s ease-in-out 0.5s; /* Transisi cepat untuk visibilitas setelah splash */
+}
+
+#main-content.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* --- NAVBAR --- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    z-index: 100;
+    transform: translateY(-100%);
+    transition: background-color 0.3s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.6s;
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 10, 26, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* State setelah main-content visible */
+#main-content.visible header {
+    transform: translateY(0);
+}
+
+.nav-logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    font-weight: 400;
+    position: relative;
+    padding: 5px 0;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary-color);
+    transition: width 0.3s ease-in-out;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* --- HERO SECTION --- */
+#hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding-top: var(--header-height);
+    position: relative; /* Untuk positioning bg-elements */
+}
+
+/* --- HERO BACKGROUND ELEMENTS --- */
+.hero-bg-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.code-particle {
+    position: absolute;
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.05);
+    font-family: monospace;
+    animation: floatParticle 6s ease-in-out infinite;
+}
+
+@keyframes floatParticle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+/* --- PROFILE PICTURE NEW STYLE --- */
+.profile-container {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    margin: 0 auto 2rem;
+    padding: 4px; /* Ruang untuk border gradient */
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 0 40px rgba(142, 68, 173, 0.4);
+    animation: floatProfile 6s ease-in-out infinite;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--bg-color); /* Border dalam agar terpisah dari gradient */
+    background-color: var(--bg-color);
+    z-index: 2;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.profile-container:hover .profile-pic {
+    transform: scale(1.05);
+}
+
+@keyframes floatProfile {
+    0%, 100% { transform: translateY(0); box-shadow: 0 0 40px rgba(142, 68, 173, 0.4); }
+    50% { transform: translateY(-15px); box-shadow: 0 20px 60px rgba(142, 68, 173, 0.2); }
+}
+
+.hero-content {
+    /* State awal untuk animasi masuk */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out 0.9s, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.9s;
+}
+
+/* State setelah main-content visible */
+#main-content.visible .hero-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    color: #bdc3c7;
+}
+
+.scroll-down-btn {
+    position: absolute;
+    bottom: 30px;
+    font-size: 1.5rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+/* --- GLASSMORPHISM CARD --- */
+.card.glassmorphism {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 2.5rem;
+    /* Transition ditangani JS untuk efek tilt */
+    transition: box-shadow 0.3s ease-in-out; 
+}
+
+.card.glassmorphism:hover {
+    /* Transform dihapus disini agar tidak bentrok dengan JS Tilt */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* --- LATAR BELAKANG --- */
+#latar-belakang p {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.decorative-line {
+    width: 100px;
+    height: 1px;
+    background: var(--border-color);
+    margin: 2rem auto;
+}
+
+/* --- MINAT & FOKUS --- */
+.grid-2x2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.card-interactive {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.card-interactive:hover {
+    /* Transform dihapus disini agar tidak bentrok dengan JS Tilt */
+    box-shadow: 0 0 30px var(--glow-color-1);
+}
+
+.card-interactive i {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.card-interactive:hover i {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.card-interactive h4 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* --- KARYA SECTION --- */
+.karya-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.karya-card {
+    background: rgba(20, 20, 40, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+}
+
+.karya-card:hover {
+    /* Transform dihapus disini agar tidak bentrok dengan JS Tilt */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 20px var(--glow-color-1);
+}
+
+.karya-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
+    overflow: hidden; /* Penting untuk efek zoom */
+}
+
+/* Efek zoom pada konten gambar saat hover */
+.karya-img > div {
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.karya-card:hover .karya-img > div {
+    transform: scale(1.1);
+}
+
+.karya-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.karya-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+.karya-description {
+    font-size: 0.95rem;
+    color: #bdc3c7;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+
+.karya-links {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: auto; /* Dorong tombol ke bawah */
+}
+
+.karya-link {
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
+}
+
+.karya-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(142, 68, 173, 0.5);
+}
+
+.karya-link.outline {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    box-shadow: none;
+}
+
+.karya-link.outline:hover {
+    border-color: var(--secondary-color);
+    background: rgba(52, 152, 219, 0.1);
+    color: var(--secondary-color);
+}
+
+/* --- TIMELINE --- */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    background: var(--border-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1.5px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: -10px;
+    background-color: var(--bg-color);
+    border: 4px solid var(--secondary-color);
+    top: 25px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-item:nth-child(even)::after {
+    left: -10px;
+}
+
+.timeline-content {
+    padding: 20px 30px;
+    background: var(--card-bg);
+    position: relative;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.timeline-item:nth-child(odd) {
+    text-align: right;
+}
+
+/* --- SKILLS --- */
+.skills-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.skill {
+    margin-bottom: 2rem;
+}
+
+.skill p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 15px;
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.progress {
+    height: 100%;
+    width: 0; /* Initial width */
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 15px;
+    transition: width 1.5s ease-in-out;
+}
+
+.percent-text {
+    display: block;
+    text-align: right;
+    margin-top: 0.5rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out 1s;
+}
+
+.skill.visible .percent-text {
+    opacity: 1;
+}
+
+/* --- KONTAK / FOOTER --- */
+#kontak {
+    text-align: center;
+}
+
+.contact-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.contact-icon {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+    position: relative;
+}
+
+.contact-icon:hover {
+    transform: scale(1.2);
+    color: var(--secondary-color);
+    text-shadow: 0 0 15px var(--glow-color-2);
+}
+
+.contact-icon::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.contact-icon:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+.copyright {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+.copyright .fa-heart {
+    color: var(--primary-color);
+}
+
+/* --- SCROLL REVEAL ANIMATION --- */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- BIODATA STYLES --- */
+.biodata-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.biodata-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.biodata-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.biodata-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.biodata-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.biodata-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.biodata-label {
+    font-size: 0.8rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.2rem;
+}
+
+.biodata-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .biodata-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    nav ul {
+        display: none; /* Sembunyikan menu untuk mobile, bisa diganti dengan burger menu */
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .splash-title {
+        font-size: 3.5rem;
+    }
+
+    .timeline::after {
+        left: 20px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 60px;
+        padding-right: 10px;
+    }
+
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        left: 0;
+        text-align: left;
+    }
+
+    .timeline-item::after {
+        left: 10px;
+    }
+}
