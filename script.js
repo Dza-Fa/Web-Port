@@ -167,22 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    
-                    // Animasi khusus untuk Skill Bar saat section skills terlihat
-                    if (entry.target.id === 'skills' || entry.target.closest('#skills')) {
-                        const progressBars = entry.target.querySelectorAll('.progress');
-                        progressBars.forEach(bar => {
-                            const percent = bar.getAttribute('data-percent');
-                            if (percent) {
-                                bar.style.width = percent + '%';
-                                const text = bar.parentElement.nextElementSibling;
-                                if (text && text.classList.contains('percent-text')) {
-                                    text.innerText = percent + '%';
-                                }
-                            }
-                        });
-                    }
-                    
                     observer.unobserve(entry.target);
                 }
             });
@@ -192,26 +176,4 @@ document.addEventListener('DOMContentLoaded', () => {
         revealElements.forEach(el => observer.observe(el));
     }
 
-    // --- 💧 RIPPLE EFFECT ---
-    function setupRippleEffect() {
-        const buttons = document.querySelectorAll('.ripple-btn');
-        buttons.forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                const ripple = document.createElement('span');
-                ripple.classList.add('ripple');
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-
-                this.appendChild(ripple);
-
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-    }
 });

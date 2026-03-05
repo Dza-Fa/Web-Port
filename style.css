@@ -51,6 +51,7 @@ a {
     text-decoration: none;
 }
 
+/* Simplified section title styling */
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -67,10 +68,9 @@ a {
     bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
+    width: 0; /* Mulai dari 0 untuk animasi */
     height: 3px;
     background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    width: 0; /* Mulai dari 0 untuk animasi */
     transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -108,7 +108,7 @@ main.focus-mode .page-section.is-blurred {
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 9999;
-    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, box-shadow 0.3s ease;
 }
 
 body:hover .custom-cursor {
@@ -119,6 +119,7 @@ body:hover .custom-cursor {
     width: 40px;
     height: 40px;
     background-color: rgba(52, 152, 219, 0.3);
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
 }
 
 /* --- FIXED BACKGROUND --- */
@@ -333,7 +334,7 @@ body:hover .custom-cursor {
 #main-content {
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.1s ease-in-out 0.5s; /* Transisi cepat untuk visibilitas setelah splash */
+    transition: opacity 0.1s ease-in-out 0.5s;
 }
 
 #main-content.visible {
@@ -452,7 +453,7 @@ nav ul li a:hover::after {
     width: 170px;
     height: 170px;
     margin: 0 auto 2rem;
-    padding: 4px; /* Ruang untuk border gradient */
+    padding: 4px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     box-shadow: 0 0 40px rgba(142, 68, 173, 0.4);
@@ -529,12 +530,10 @@ nav ul li a:hover::after {
     border: 1px solid var(--border-color);
     border-radius: 15px;
     padding: 2.5rem;
-    /* Transition ditangani JS untuk efek tilt */
     transition: box-shadow 0.3s ease-in-out; 
 }
 
 .card.glassmorphism:hover {
-    /* Transform dihapus disini agar tidak bentrok dengan JS Tilt */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
@@ -570,7 +569,6 @@ nav ul li a:hover::after {
 }
 
 .card-interactive:hover {
-    /* Transform dihapus disini agar tidak bentrok dengan JS Tilt */
     box-shadow: 0 0 30px var(--glow-color-1);
 }
 
@@ -610,7 +608,6 @@ nav ul li a:hover::after {
 }
 
 .karya-card:hover {
-    /* Transform dihapus disini agar tidak bentrok dengan JS Tilt */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 20px var(--glow-color-1);
 }
 
@@ -763,37 +760,6 @@ nav ul li a:hover::after {
 .skill p {
     font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 15px;
-    background-color: var(--card-bg);
-    border-radius: 15px;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-}
-
-.progress {
-    height: 100%;
-    width: 0; /* Initial width */
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    border-radius: 15px;
-    transition: width 1.5s ease-in-out;
-}
-
-.percent-text {
-    display: block;
-    text-align: right;
-    margin-top: 0.5rem;
-    font-weight: 600;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out 1s;
-}
-
-.skill.visible .percent-text {
-    opacity: 1;
 }
 
 /* --- KONTAK / FOOTER --- */
