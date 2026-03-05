@@ -43,7 +43,7 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
-    cursor: none; /* Sembunyikan cursor default */
+    cursor: none;
 }
 
 a {
@@ -458,6 +458,7 @@ nav ul li a:hover::after {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     box-shadow: 0 0 40px rgba(142, 68, 173, 0.4);
     animation: floatProfile 6s ease-in-out infinite;
+    will-change: transform;
 }
 
 .profile-pic {
@@ -465,11 +466,12 @@ nav ul li a:hover::after {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--bg-color); /* Border dalam agar terpisah dari gradient */
+    border: 4px solid var(--bg-color);
     background-color: var(--bg-color);
     z-index: 2;
     display: block;
     transition: transform 0.3s ease;
+    will-change: transform;
 }
 
 .profile-container:hover .profile-pic {
@@ -482,13 +484,13 @@ nav ul li a:hover::after {
 }
 
 .hero-content {
-    /* State awal untuk animasi masuk */
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 0.8s ease-out 0.9s, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.9s;
+    will-change: opacity, transform;
 }
 
-/* State setelah main-content visible */
+/* State after main-content visible */
 #main-content.visible .hero-content {
     opacity: 1;
     transform: translateY(0);

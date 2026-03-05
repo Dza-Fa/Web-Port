@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupNavFocus();
     setupSplashInteractivity();
     setupTiltEffect();
-    // --- 🌊 SPLASH SCREEN TRANSITION ---
+// --- 🌊 SPLASH SCREEN TRANSITION ---
     function setupSplashTransition() {
         const enterBtn = document.getElementById('enter-btn');
         const splashScreen = document.getElementById('splash-screen');
@@ -17,15 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (enterBtn && splashScreen && mainContent) {
             enterBtn.addEventListener('click', () => {
-                // 1. Tambahkan kelas untuk memulai animasi Zoom In Exit
                 splashScreen.classList.add('animate-exit');
-                
-                // 2. Tampilkan konten utama (akan muncul perlahan sesuai CSS transition)
                 mainContent.classList.add('visible');
-
-                // 3. Tunggu animasi selesai, lalu hilangkan elemen dari layout
                 splashScreen.addEventListener('animationend', (e) => {
-                    if (e.target === splashScreen) { // Pastikan event dari container utama
+                    if (e.target === splashScreen) {
                         splashScreen.style.display = 'none';
                     }
                 });
@@ -66,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cursor.style.top = e.clientY + 'px';
         });
 
-        // Tambahkan efek hover via JS karena CSS sibling selector tidak bisa menjangkau elemen nested
+        // Hover elements that trigger cursor expansion
         const hoverElements = document.querySelectorAll('a, button, .card-interactive, .karya-card, .contact-icon');
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
