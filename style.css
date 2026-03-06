@@ -43,7 +43,6 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
-    cursor: none;
 }
 
 a {
@@ -95,31 +94,6 @@ main.focus-mode .page-section.is-blurred {
     filter: blur(5px);
     opacity: 0.5;
     pointer-events: none; /* Mencegah interaksi dengan elemen yang di-blur */
-}
-
-
-/* --- CUSTOM CURSOR --- */
-.custom-cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--secondary-color);
-    border-radius: 50%;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 9999;
-    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, box-shadow 0.3s ease;
-}
-
-body:hover .custom-cursor {
-    opacity: 1;
-}
-
-.custom-cursor.expand {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(52, 152, 219, 0.3);
-    box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
 }
 
 /* --- FIXED BACKGROUND --- */
@@ -532,11 +506,33 @@ nav ul li a:hover::after {
     border: 1px solid var(--border-color);
     border-radius: 15px;
     padding: 2.5rem;
-    transition: box-shadow 0.3s ease-in-out; 
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card.glassmorphism::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+    background-size: 200% 200%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
 }
 
 .card.glassmorphism:hover {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(142, 68, 173, 0.3);
+    border-color: rgba(52, 152, 219, 0.5);
+}
+
+.card.glassmorphism:hover::before {
+    opacity: 0.1;
 }
 
 /* --- LATAR BELAKANG --- */
@@ -598,19 +594,39 @@ nav ul li a:hover::after {
 }
 
 .karya-card {
-    background: rgba(20, 20, 40, 0.6);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
     border-radius: 15px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     position: relative;
 }
 
+.karya-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+    background-size: 200% 200%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
 .karya-card:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 20px var(--glow-color-1);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(142, 68, 173, 0.3);
+    border-color: rgba(52, 152, 219, 0.5);
+}
+
+.karya-card:hover::before {
+    opacity: 0.1;
 }
 
 .karya-img {
@@ -751,17 +767,107 @@ nav ul li a:hover::after {
 
 /* --- SKILLS --- */
 .skills-wrapper {
-    max-width: 800px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
 .skill {
-    margin-bottom: 2rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
 }
 
-.skill p {
+/* Animated background gradient on hover */
+.skill::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+    background-size: 200% 200%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.skill:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(142, 68, 173, 0.3);
+    border-color: rgba(52, 152, 219, 0.5);
+}
+
+.skill:hover::before {
+    opacity: 0.1;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.skill-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(142, 68, 173, 0.2);
+    transition: all 0.3s ease;
+}
+
+.skill:hover .skill-icon-wrapper {
+    transform: scale(1.15) rotate(-5deg);
+    box-shadow: 0 15px 35px rgba(52, 152, 219, 0.4);
+}
+
+.skill-name {
     font-size: 1.1rem;
     font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
+}
+
+.skill-level {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.5rem 1rem;
+    margin-top: auto;
+    border-radius: 50px;
+    background: rgba(52, 152, 219, 0.2);
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    transition: all 0.3s ease;
+}
+
+.skill:hover .skill-level {
+    background: var(--secondary-color);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
 }
 
 /* --- KONTAK / FOOTER --- */

@@ -3,9 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Inisialisasi Fungsi ---
     setupSplashTransition();
-    setupCustomCursor();
     setupScrollReveal();
-    setupRippleEffect();
     setupNavFocus();
     setupSplashInteractivity();
     setupTiltEffect();
@@ -15,16 +13,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const splashScreen = document.getElementById('splash-screen');
         const mainContent = document.getElementById('main-content');
 
-        if (enterBtn && splashScreen && mainContent) {
-            enterBtn.addEventListener('click', () => {
-                splashScreen.classList.add('animate-exit');
-                mainContent.classList.add('visible');
-                splashScreen.addEventListener('animationend', (e) => {
-                    if (e.target === splashScreen) {
-                        splashScreen.style.display = 'none';
-                    }
-                });
+        const transitionToMain = () => {
+            splashScreen.classList.add('animate-exit');
+            mainContent.classList.add('visible');
+            splashScreen.addEventListener('animationend', (e) => {
+                if (e.target === splashScreen) {
+                    splashScreen.style.display = 'none';
+                }
             });
+        };
+
+        if (enterBtn && splashScreen && mainContent) {
+            enterBtn.addEventListener('click', transitionToMain);
+            
+            // Check if page was reloaded
+            const isReload = sessionStorage.getItem('pageLoaded');
+            if (isReload) {
+                // Auto-transition only on reload/refresh
+                setTimeout(transitionToMain, 100);
+            }
+            // Mark page as loaded for next reload
+            sessionStorage.setItem('pageLoaded', 'true');
         }
     }
 
@@ -49,24 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Mulai mengetik setelah jeda singkat
         if (typingText) setTimeout(type, 500);
-    }
-
-    // --- ✨ CUSTOM CURSOR EFFECT ---
-    function setupCustomCursor() {
-        const cursor = document.querySelector('.custom-cursor');
-        if (!cursor) return;
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        // Hover elements that trigger cursor expansion
-        const hoverElements = document.querySelectorAll('a, button, .card-interactive, .karya-card, .contact-icon');
-        hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
-        });
     }
 
     // --- 🎯 NAVIGATION FOCUS MODE ---
@@ -120,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 🧊 3D TILT EFFECT FOR CARDS ---
     function setupTiltEffect() {
-        const cards = document.querySelectorAll('.card-interactive, .karya-card, .card.glassmorphism');
+        const cards = document.querySelectorAll('.card-interactive');
 
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -131,10 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
 
-                let intensity = 5; // Default intensity
-                if (card.closest('#biodata, #karya')) {
-                    intensity = 2; // Lower intensity for these sections
-                }
+                const intensity = 5;
 
                 // Kalkulasi rotasi berdasarkan posisi mouse
                 const rotateX = ((y - centerY) / centerY) * -intensity;
